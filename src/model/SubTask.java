@@ -15,5 +15,13 @@ public class SubTask extends Task {
 
     public void setEpic(Epic epic) { this.epic = epic; }
 
-
+    @Override
+    public String toString() {
+        return "SubTask{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

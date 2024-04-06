@@ -11,7 +11,11 @@ public class TaskManager {
     private HashMap<Integer, Epic> epics;
     private HashMap<Integer, SubTask> subTasks;
     private int seq = 0;
-    public TaskManager() { this.tasks = new HashMap<>(); }
+    public TaskManager() {
+        this.tasks = new HashMap<>();
+        this.epics = new HashMap<>();
+        this.subTasks = new HashMap<>();
+    }
     public Task create(Task task) {
         task.setId(generateId());
         tasks.put(task.getId(), task);
@@ -62,11 +66,14 @@ public class TaskManager {
     }
 
     private void calculateStatus(Epic epic) {
-        Status status = Status.NEW;
+        Status status = epic.calculateStatus();
         epic.setStatus(status);
     }
 
     public SubTask createSubTask(SubTask subTask) {
+        subTask.setId(generateId());
+        subTasks.put(subTask.getId(), subTask);
+
         Epic epic = epics.get(subTask.getEpic().getId());
         epic.addTask(subTask);
         calculateStatus(epic);
@@ -74,6 +81,8 @@ public class TaskManager {
     }
 
     public Epic createEpic(Epic epic) {
+        epic.setId(generateId());
+        epics.put(epic.getId(), epic);
         return epic;
     }
 

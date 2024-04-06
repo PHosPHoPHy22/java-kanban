@@ -1,5 +1,4 @@
 package model;
-import java.util.HashMap;
 import java.util.ArrayList;
 public class Epic extends Task {
     ArrayList<SubTask> subTasks = new ArrayList<>();
@@ -18,39 +17,35 @@ public class Epic extends Task {
 
 
     public void addTask(SubTask subTask) {
-
+        subTasks.add(subTask);
     }
 
 
     public void removeTask(SubTask subTask) {
-
+        subTasks.remove(subTask);
     }
 
 
-    public static void printEpic(Epic epic) {
-        System.out.println("Epic: id=" + epic.getId() + ", name=" + epic.getName());
-    }
-
-    public Status epicStatus() {
-        boolean allDone = true;
-        boolean allNew = true;
-        if (subTasks.isEmpty()) {
+    public Status calculateStatus() {
+        if (subTasks.isEmpty() || subTasks.stream().allMatch(s -> s.getStatus().equals(Status.NEW))) {
             return Status.NEW;
         }
-        for (SubTask subTask : subTasks) {
-            if (subTask.getStatus().equals(Status.DONE)) {
-                allNew = false;
-            } else if (subTask.getStatus().equals(Status.NEW)) {
-                allDone = false;
-            }
-        }
-        if(allDone) {
+
+        if (subTasks.stream().allMatch(s -> s.getStatus().equals(Status.DONE))) {
             return Status.DONE;
-        } else if (allNew) {
-            return Status.NEW;
-        } else {
-            return Status.IN_PROGRESS;
         }
+
+        return Status.IN_PROGRESS;
     }
 
+    @Override
+    public String toString() {
+        return "Epic{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", status=" + status +
+                ", description='" + description + '\'' +
+                ", subTasks=" + subTasks +
+                '}';
+    }
 }

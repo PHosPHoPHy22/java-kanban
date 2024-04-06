@@ -25,6 +25,38 @@ public class Main {
         System.out.println("Create task: " + task1);
 
 
+        Epic epic = new Epic("test epic", "test");
+        Epic createdEpic = taskManager.createEpic(epic);
+        System.out.println("Create epic: " + createdEpic);
+
+        SubTask subTask1 = new SubTask("test subTask1", Status.NEW, "test", createdEpic);
+        taskManager.createSubTask(subTask1);
+
+        SubTask subTask2 = new SubTask("test subTask2", Status.NEW, "test", createdEpic);
+        taskManager.createSubTask(subTask2);
+
+
+        System.out.println("Created epic: " + createdEpic);
+
+        subTask1.setStatus(Status.IN_PROGRESS);
+        taskManager.updateSubTask(subTask1);
+
+        System.out.println("Status After IN_PROGRESS: " + createdEpic);
+
+        subTask1.setStatus(Status.DONE);
+        taskManager.updateSubTask(subTask1);
+        subTask2.setStatus(Status.DONE);
+        taskManager.updateSubTask(subTask2);
+
+        System.out.println("Status After DONE: " + createdEpic);
+
+        SubTask subTask3 = taskManager.createSubTask(new SubTask("test subTask3", Status.NEW, "test", createdEpic));
+
+        System.out.println("Status After new Subtask: " + createdEpic);
+
+        taskManager.deleteSubTask(subTask3.getId());
+
+        System.out.println("Status After Delete: " + createdEpic);
         }
     }
 
