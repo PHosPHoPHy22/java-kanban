@@ -57,6 +57,43 @@ public class Main {
         taskManager.deleteSubTask(subTask3.getId());
 
         System.out.println("Status After Delete: " + createdEpic);
+
+        var subTasks = taskManager.getSubTasks();
+        System.out.println(subTasks);
+        System.out.println(subTasks.size());
+
+        taskManager.deleteEpic(createdEpic.getId());
+        subTasks = taskManager.getSubTasks();
+        System.out.println(subTasks);
+        System.out.println(subTasks.size());
+
+        Task task2 = taskManager.create(new Task("New Task", Status.NEW, "new Task"));
+        System.out.println("Tasks: " + taskManager.getAll());
+        taskManager.deleteTasks();
+        System.out.println("Tasks: " + taskManager.getAll());
+
+        var newEpic = taskManager.createEpic(new Epic("newTestEpic", "epic"));
+        SubTask subTask5 = new SubTask("SubTask5", Status.NEW, "SubTask5 test", newEpic);
+        SubTask subTask6 = new SubTask("SubTask6", Status.NEW, "SubTask6 test", newEpic);
+        SubTask subTask7 = new SubTask("SubTask7", Status.NEW, "SubTask7 test", newEpic);
+        SubTask subTask8 = new SubTask("SubTask8", Status.NEW, "SubTask8 test", newEpic);
+        taskManager.createSubTask(subTask5);
+        taskManager.createSubTask(subTask6);
+        taskManager.createSubTask(subTask7);
+        taskManager.createSubTask(subTask8);
+
+        System.out.println("newEpic: " + newEpic);
+
+        taskManager.deleteSubtasks();
+
+        System.out.println("newEpic delete: " + newEpic);
+
+        System.out.println(taskManager.getEpics());
+
+        taskManager.deleteEpics();
+
+        System.out.println(taskManager.getEpics());
+
         }
     }
 

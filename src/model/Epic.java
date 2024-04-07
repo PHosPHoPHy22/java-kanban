@@ -1,14 +1,11 @@
 package model;
 import java.util.ArrayList;
 public class Epic extends Task {
-    ArrayList<SubTask> subTasks = new ArrayList<>();
+    private ArrayList<SubTask> subTasks = new ArrayList<>();
 
 
     public Epic(String name, String description) {
         super(name, Status.NEW, description);
-    }
-    public Epic(String name, Status status, String description) {
-        super(name, status, description);
     }
 
     public ArrayList<SubTask> getSubTasks() {
@@ -38,6 +35,10 @@ public class Epic extends Task {
         return Status.IN_PROGRESS;
     }
 
+    public void cleanSubtaskIds() {
+        subTasks.clear();
+    }
+
     @Override
     public String toString() {
         return "Epic{" +
@@ -48,4 +49,6 @@ public class Epic extends Task {
                 ", subTasks=" + subTasks +
                 '}';
     }
+
+
 }
