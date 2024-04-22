@@ -2,12 +2,18 @@ import model.Epic;
 import model.Status;
 import model.SubTask;
 import model.Task;
+import service.InMemoryHistoryManager;
+import service.InMemoryTaskManager;
+import service.Managers;
 import service.TaskManager;
 
 public class Main {
 
     public static void main(String[] args) {
-        TaskManager taskManager = new TaskManager();
+        InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
+        TaskManager manager = new InMemoryTaskManager(historyManager);
+
+        TaskManager taskManager = Managers.getDefaults();
         Task task = taskManager.create(new Task("new Task", Status.NEW, "Description"));
         System.out.println("Create task: " + task);
 
@@ -72,7 +78,7 @@ public class Main {
         taskManager.deleteTasks();
         System.out.println("Tasks: " + taskManager.getAll());
 
-        var newEpic = taskManager.createEpic(new Epic("newTestEpic", "epic"));
+        var newEpic = taskManager.createEpic(new Epic("newTestEpic", "Epic"));
         SubTask subTask5 = new SubTask("SubTask5", Status.NEW, "SubTask5 test", newEpic);
         SubTask subTask6 = new SubTask("SubTask6", Status.NEW, "SubTask6 test", newEpic);
         SubTask subTask7 = new SubTask("SubTask7", Status.NEW, "SubTask7 test", newEpic);
@@ -92,9 +98,6 @@ public class Main {
 
         taskManager.deleteEpics();
 
-        System.out.println(taskManager.getEpics());
-
-        }
     }
-    //
-
+}
+//

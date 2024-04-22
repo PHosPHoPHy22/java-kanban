@@ -1,5 +1,8 @@
 package model;
 
+import service.InMemoryHistoryManager;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Task {
@@ -7,6 +10,7 @@ public class Task {
     protected String name;
     protected Status status;
     protected String description;
+    public InMemoryHistoryManager historyManager;
 
     public Task(int id, String name, Status status, String description) {
         this.id = id;
@@ -35,10 +39,12 @@ public class Task {
 
     public void setDescription(String description) { this.description = description; }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
+
 
     @Override
     public boolean equals(Object o) {
