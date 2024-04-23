@@ -4,7 +4,9 @@ import model.Epic;
 import model.Status;
 import model.SubTask;
 import model.Task;
+import org.junit.Assert;
 import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InMemoryHistoryManagerTest {
     @Test
@@ -17,7 +19,7 @@ public class InMemoryHistoryManagerTest {
         taskManager.getEpic(1);
         taskManager.getEpic(2);
         taskManager.getSubtask(0);
-        System.out.println(taskManager.getHistory());
+        assertEquals(2, taskManager.getHistory().size());
 
     }
 }

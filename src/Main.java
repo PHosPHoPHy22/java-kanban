@@ -10,8 +10,6 @@ import service.TaskManager;
 public class Main {
 
     public static void main(String[] args) {
-        InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        TaskManager manager = new InMemoryTaskManager(historyManager);
 
         TaskManager taskManager = Managers.getDefaults();
         Task task = taskManager.create(new Task("new Task", Status.NEW, "Description"));

@@ -8,7 +8,6 @@ import java.util.Objects;
 import model.Task;
 
 public interface HistoryManager {
-    List<Task> history = new ArrayList<>();
 
     void add(Task task);
 

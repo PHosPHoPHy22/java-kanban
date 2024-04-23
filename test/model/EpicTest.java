@@ -7,7 +7,8 @@ import service.InMemoryHistoryManager;
 import service.InMemoryTaskManager;
 import service.TaskManager;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
+
 @DisplayName("Epic")
 public class EpicTest {
     @Test
@@ -37,7 +38,7 @@ public class EpicTest {
         taskManager.createSubTask(subTask6);
         taskManager.createSubTask(subTask7);
         taskManager.createSubTask(subTask8);
-        System.out.println(newEpic.getSubTasks());
+        assertNotNull("Epic not null", newEpic);
     }
     @Test
     public void shouldDeleteSubTask() {
@@ -54,17 +55,17 @@ public class EpicTest {
         var newEpic = taskManager.createEpic(new Epic("newTestEpic", " "));
         SubTask subTask5 = new SubTask("SubTask5", Status.NEW, "SubTask5 test", newEpic);
         taskManager.createSubTask(subTask5);
-        System.out.println(newEpic.getStatus());
+        assertEquals(newEpic.getStatus(), Status.NEW);
 
         subTask5.setStatus(Status.IN_PROGRESS);
         taskManager.updateSubTask(subTask5);
         newEpic.calculateStatus();
-        System.out.println(newEpic.getStatus());
+        assertEquals(newEpic.getStatus(), Status.IN_PROGRESS);
 
         subTask5.setStatus(Status.DONE);
         taskManager.updateSubTask(subTask5);
         newEpic.calculateStatus();
-        System.out.println(newEpic.getStatus());
+        assertEquals(newEpic.getStatus(), Status.DONE);
     }
 
     @Test
@@ -76,9 +77,9 @@ public class EpicTest {
         SubTask subTask6 = new SubTask("SubTask6", Status.NEW, "SubTask6 test", newEpic);
         taskManager.createSubTask(subTask5);
         taskManager.createSubTask(subTask6);
-        System.out.println(newEpic.getSubTasks());
+        assertNotNull(newEpic);
         newEpic.cleanSubtaskIds();
-        System.out.println(newEpic.getSubTasks());
+        assertEquals(0, newEpic.getSubTasks().size());
     }
 }
 
