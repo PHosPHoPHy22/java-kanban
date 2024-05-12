@@ -58,7 +58,6 @@ public class Main {
 
         System.out.println("Status After new Subtask: " + createdEpic);
 
-        taskManager.deleteSubTask(subTask3.getId());
 
         System.out.println("Status After Delete: " + createdEpic);
 
