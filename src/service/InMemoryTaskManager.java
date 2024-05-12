@@ -114,7 +114,6 @@ public class InMemoryTaskManager implements TaskManager {
         epicSaved.getSubTasks().remove(removeSubTask);
         calculateStatus(epicSaved);
     }
-
     @Override
     public void calculateStatus(Epic epic) {
         Status status = epic.calculateStatus();

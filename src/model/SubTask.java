@@ -22,5 +22,5 @@ public class SubTask extends Task {
     public Integer getEpicId() {
         return epic.getId();
     }
-    //
+
 }

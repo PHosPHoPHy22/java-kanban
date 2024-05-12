@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 
 public interface TaskManager {
-
     Task create(Task task);
     Task get(int id);
     void update(Task task);

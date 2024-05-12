@@ -14,5 +14,4 @@ public interface HistoryManager {
     List<Task> getAll();
 
     void removeId(int id);
-
 }
