@@ -5,15 +5,14 @@ import model.Status;
 import model.SubTask;
 import model.Task;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class InMemoryTaskManagerTest {
+
     @Test
     public void shoulDeleteAllTasks() {
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
@@ -24,6 +23,7 @@ public class InMemoryTaskManagerTest {
         taskManager.delete(1);
         assertEquals(0, taskManager.getAll().size());
     }
+
     @Test
     public void shouldDeleteEpicAndSubTasks() {
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
@@ -31,13 +31,18 @@ public class InMemoryTaskManagerTest {
         TaskManager taskManager = new InMemoryTaskManager(historyManager);
         var newEpic = taskManager.createEpic(new Epic("newTestEpic", " "));
         SubTask subTask5 = new SubTask("SubTask5", Status.NEW, "SubTask5 test", newEpic);
+        historyManager.add(subTask5);
         SubTask subTask6 = new SubTask("SubTask6", Status.NEW, "SubTask6 test", newEpic);
+        historyManager.add(subTask6);
         taskManager.createSubTask(subTask5);
         taskManager.createSubTask(subTask6);
         assertNotNull(newEpic);
         taskManager.deleteEpic(1);
-        assertNull(taskManager.getEpic(newEpic.getId()));
+
+        assertEquals(List.of(), taskManager.getEpics());
+
     }
+
     @Test
     public void shouldDeleteAllSubTasksButNotEpic() {
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();

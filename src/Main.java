@@ -2,8 +2,6 @@ import model.Epic;
 import model.Status;
 import model.SubTask;
 import model.Task;
-import service.InMemoryHistoryManager;
-import service.InMemoryTaskManager;
 import service.Managers;
 import service.TaskManager;
 
@@ -58,7 +56,6 @@ public class Main {
 
         System.out.println("Status After new Subtask: " + createdEpic);
 
-        taskManager.deleteSubTask(subTask3.getId());
 
         System.out.println("Status After Delete: " + createdEpic);
 
@@ -98,4 +95,3 @@ public class Main {
 
     }
 }
-//
