@@ -1,26 +1,28 @@
 package service;
 
+import model.Epic;
 import model.Status;
 import model.SubTask;
-import model.Epic;
 import model.Task;
-import service.HistoryManager;
-import service.TaskManager;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager {
-    private HashMap<Integer, Task> tasks;
-    private HashMap<Integer, Epic> epics;
-    private HashMap<Integer, SubTask> subTasks;
+    private final HashMap<Integer, Task> tasks;
+    private final HashMap<Integer, Epic> epics;
+    private final HashMap<Integer, SubTask> subTasks;
     private final HistoryManager historyManager;
     private int seq = 0;
+
     public InMemoryTaskManager(HistoryManager historyManager) {
         this.historyManager = historyManager;
         this.tasks = new HashMap<>();
         this.epics = new HashMap<>();
         this.subTasks = new HashMap<>();
     }
+
     @Override
     public Task create(Task task) {
         task.setId(generateId());
@@ -114,6 +116,7 @@ public class InMemoryTaskManager implements TaskManager {
         epicSaved.getSubTasks().remove(removeSubTask);
         calculateStatus(epicSaved);
     }
+
     @Override
     public void calculateStatus(Epic epic) {
         Status status = epic.calculateStatus();
@@ -142,16 +145,19 @@ public class InMemoryTaskManager implements TaskManager {
     public List<Task> getHistory() {
         return historyManager.getAll();
     }
+
     @Override
     public Task getTask(int id) {
         historyManager.add(tasks.get(id));
         return tasks.get(id);
     }
+
     @Override
     public SubTask getSubtask(int id) {
         historyManager.add(subTasks.get(id));
         return subTasks.get(id);
     }
+
     @Override
     public Epic getEpic(int id) {
         historyManager.add(epics.get(id));
