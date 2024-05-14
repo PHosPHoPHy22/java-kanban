@@ -68,6 +68,7 @@ public class InMemoryTaskManager implements TaskManager {
         }
         calculateStatus(savedEpic);
     }
+
     @Override
     public List<Task> getAll() {
         return new ArrayList<>(tasks.values());
