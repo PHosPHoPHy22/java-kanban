@@ -1,8 +1,5 @@
 package model;
 
-import service.InMemoryHistoryManager;
-
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Task {
@@ -10,7 +7,7 @@ public class Task {
     protected String name;
     protected Status status;
     protected String description;
-    public InMemoryHistoryManager historyManager;
+
 
     public Task(int id, String name, Status status, String description) {
         this.id = id;
@@ -18,26 +15,48 @@ public class Task {
         this.status = status;
         this.description = description;
     }
+
     public Task(String name, Status status, String description) {
         this.name = name;
         this.status = status;
         this.description = description;
     }
-    public Epic getEpic() { return null; }
-    public int getId() { return id; }
 
-    public void setId(int id) { this.id = id; }
+    public Epic getEpic() {
+        return null;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public int getId() {
+        return id;
+    }
 
-    public Status getStatus() { return status; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public void setStatus(Status status) { this.status = status; }
+    public String getName() {
+        return name;
+    }
 
-    public String getDescription() { return description; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public void setDescription(String description) { this.description = description; }
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
     @Override

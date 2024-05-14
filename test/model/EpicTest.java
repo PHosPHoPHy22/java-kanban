@@ -7,7 +7,8 @@ import service.InMemoryHistoryManager;
 import service.InMemoryTaskManager;
 import service.TaskManager;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 @DisplayName("Epic")
 public class EpicTest {
@@ -40,6 +41,7 @@ public class EpicTest {
         taskManager.createSubTask(subTask8);
         assertNotNull("Epic not null", newEpic);
     }
+
     @Test
     public void shouldDeleteSubTask() {
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
@@ -48,6 +50,7 @@ public class EpicTest {
         SubTask subTask5 = new SubTask("SubTask5", Status.NEW, "SubTask5 test", newEpic);
         newEpic.removeTask(subTask5);
     }
+
     @Test
     public void calculateStatusTest() {
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();

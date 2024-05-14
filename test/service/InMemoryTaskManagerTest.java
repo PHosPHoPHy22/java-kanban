@@ -8,7 +8,8 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class InMemoryTaskManagerTest {
 
@@ -22,6 +23,7 @@ public class InMemoryTaskManagerTest {
         taskManager.delete(1);
         assertEquals(0, taskManager.getAll().size());
     }
+
     @Test
     public void shouldDeleteEpicAndSubTasks() {
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
@@ -40,6 +42,7 @@ public class InMemoryTaskManagerTest {
         assertEquals(List.of(), taskManager.getEpics());
 
     }
+
     @Test
     public void shouldDeleteAllSubTasksButNotEpic() {
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();

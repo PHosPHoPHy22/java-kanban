@@ -7,6 +7,7 @@ public class SubTask extends Task {
         super(name, status, description);
         this.epic = epic;
     }
+
     public void setEpic(Epic epic) { this.epic = epic; }
 
     @Override

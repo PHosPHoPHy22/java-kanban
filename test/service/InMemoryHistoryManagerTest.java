@@ -2,9 +2,7 @@ package service;
 
 import model.Epic;
 import model.Status;
-import model.SubTask;
 import model.Task;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
@@ -12,6 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class InMemoryHistoryManagerTest {
+
     @Test
     public void shouldShowTasksHistory() {
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
