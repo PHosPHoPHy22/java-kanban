@@ -1,11 +1,8 @@
 package service;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-
 import model.Task;
+
+import java.util.List;
 
 public interface HistoryManager {
 
