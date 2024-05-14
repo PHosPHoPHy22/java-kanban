@@ -8,7 +8,9 @@ public class SubTask extends Task {
         this.epic = epic;
     }
 
-    public void setEpic(Epic epic) { this.epic = epic; }
+    public void setEpic(Epic epic) {
+        this.epic = epic;
+    }
 
     @Override
     public String toString() {
