@@ -2,11 +2,12 @@ package service;
 
 import model.Task;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
-     LinkedHashMap map;
-     LinkedList list;
+
 
     private static class Node {
         Task item;
@@ -20,9 +21,9 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
     }
 
-    HashMap<Integer, Node> history = new HashMap<>();
-    Node first;
-    Node last;
+    private final HashMap<Integer, Node> history = new HashMap<>();
+    private Node first;
+    private Node last;
 
     @Override
     public void add(Task task) {
@@ -53,7 +54,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
     }
 
-    void linkLast(Task task) {
+    private void linkLast(Task task) {
         final Node l = last;
         final Node newNode = new Node(l, task, null);
         last = newNode;
@@ -63,7 +64,8 @@ public class InMemoryHistoryManager implements HistoryManager {
             l.next = newNode;
         }
     }
-    void removeNode(Node node) {
+
+    private void removeNode(Node node) {
         if (node.next != null) {
             node.next.prev = node.prev;
         } else {
