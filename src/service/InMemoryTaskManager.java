@@ -31,17 +31,23 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
 
-    private int generateId() { return ++seq; }
+    private int generateId() {
+        return ++seq;
+    }
 
     public void setSeq(int seq) {
         this.seq = seq;
     }
 
     @Override
-    public Task get(int id) { return tasks.get(id); }
+    public Task get(int id) {
+        return tasks.get(id);
+    }
 
     @Override
-    public void update(Task task) { tasks.put(task.getId(), task); }
+    public void update(Task task) {
+        tasks.put(task.getId(), task);
+    }
 
     @Override
     public void updateEpic(Epic epic) {
@@ -78,7 +84,9 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     @Override
-    public void delete(int id) { tasks.remove(id); }
+    public void delete(int id) {
+        tasks.remove(id);
+    }
 
     @Override
     public void deleteEpic(int id) {
