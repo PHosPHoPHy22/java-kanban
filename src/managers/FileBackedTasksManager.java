@@ -1,5 +1,6 @@
 package managers;
 
+import exceptions.ManagerSaveException;
 import models.*;
 
 import java.io.File;
@@ -21,7 +22,7 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         this.filename = src;
     }
 
-    protected void save() throws ManagerSaveException {
+    protected void save() {
         List<Task> allTasks = new ArrayList<>();
         allTasks.addAll(this.tasks.values());
         allTasks.addAll(this.epics.values());
@@ -69,7 +70,8 @@ public class FileBackedTasksManager extends InMemoryTaskManager {
         return task;
     }
 
-    public static FileBackedTasksManager loadFromFile(File file) throws IOException {
+    public static FileBackedTasksManager loadFromFile(File file) {
+        //Убрала throws IOException
         FileBackedTasksManager manager = new FileBackedTasksManager(file);
         try {
             String data = Files.readString(file.toPath());
