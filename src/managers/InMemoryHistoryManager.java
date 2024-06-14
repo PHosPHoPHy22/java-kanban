@@ -71,23 +71,25 @@ public class InMemoryHistoryManager implements HistoryManager {
             linkLast(task);
         }
     }
+
+
+    public static class Node {
+        Node next;
+        Node prev;
+        Task task;
+
+        public Node(Task task) {
+            this.next = null;
+            this.prev = null;
+            this.task = task;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "task=" + task +
+                    '}';
+        }
+    }
 }
 
-class Node {
-    Node next;
-    Node prev;
-    Task task;
-
-    public Node(Task task) {
-        this.next = null;
-        this.prev = null;
-        this.task = task;
-    }
-
-    @Override
-    public String toString() {
-        return "Node{" +
-                "task=" + task +
-                '}';
-    }
-}
