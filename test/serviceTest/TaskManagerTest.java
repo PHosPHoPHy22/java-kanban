@@ -29,6 +29,7 @@ public class TaskManagerTest {
         assertNotNull(timeEndIsNotEmpty, "Время конца Null");
         assertEquals(15, durationIsNotEmpty, "Продолжительность не 15");
 
+
         task.setStartTime(LocalDateTime.parse("2024-05-18T09:00"));
         task.setDuration(Duration.ofMinutes(15));
 

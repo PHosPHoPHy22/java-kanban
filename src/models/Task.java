@@ -21,6 +21,7 @@ public class Task implements Cloneable {
         this.taskStatus = status;
     }
 
+
     public Type getType() {
         return Type.TASK;
     }

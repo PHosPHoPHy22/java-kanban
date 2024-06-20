@@ -9,6 +9,7 @@ public class Subtask extends Task {
         relatedEpicId = 0;
     }
 
+
     public int getEpicIdForThisSubtask() {
         return relatedEpicId;
     }
