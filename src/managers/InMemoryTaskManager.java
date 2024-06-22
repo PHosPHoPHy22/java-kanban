@@ -264,11 +264,11 @@ public class InMemoryTaskManager implements TaskManager {
 
         for (Integer id : subTaskIds.keySet()) {
             Subtask subTask = subtasks.get(id);
+
             if(subTask.getStartTime() != null){
                 if (startTime == null || startTime.isAfter(subTask.getStartTime())) {
                     startTime = subTask.getStartTime();
-                }
-                if (endTime == null || endTime.isBefore(subTask.getEndTime())) {
+                } if (endTime == null || endTime.isBefore(subTask.getEndTime())) {
                     endTime = subTask.getEndTime();
                 }
                 duration = duration.plus(subTask.getDuration());
