@@ -265,6 +265,9 @@ public class InMemoryTaskManager implements TaskManager {
         for (Integer id : subTaskIds.keySet()) {
             Subtask subTask = subtasks.get(id);
 
+            if (subTask.getStartTime() == null) {
+                return;
+            }
             if (startTime == null || startTime.isAfter(subTask.getStartTime())) {
                 startTime = subTask.getStartTime();
             }
