@@ -57,6 +57,7 @@ public class Task implements Cloneable {
         return taskStatus;
     }
 
+
     public void setStatus(Status status) {
         this.taskStatus = status;
     }
