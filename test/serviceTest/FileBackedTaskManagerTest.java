@@ -15,6 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FileBackedTaskManagerTest {
 
 
+
     @Test
     public void saveTaskShouldSuccessfullySaveTaskGetTaskByIdGetIdTest() {
         InMemoryTaskManager taskManager = new InMemoryTaskManager();
@@ -36,6 +37,7 @@ public class FileBackedTaskManagerTest {
         final Epic expectedEpic = new Epic("Эпик 1", "");
         taskManager.saveEpic(expectedEpic);
         final Subtask expectedSubtask = new Subtask("Подзадача 1", "");
+        expectedEpic.addSubtasksForThisEpic(expectedSubtask);
         expectedSubtask.setEpicIdForThisSubtask(expectedEpic.getId());
         expectedSubtask.setStartTime(LocalDateTime.now());
         expectedSubtask.setDuration(Duration.ofMinutes(15));

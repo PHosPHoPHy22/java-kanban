@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TaskManagerTest {
 
+
     @Test
     public void setStartTimeAndDurationToTaskShouldSuccessfullySetStartTimeAndDurationTest() {
         InMemoryTaskManager taskManager = new InMemoryTaskManager();
