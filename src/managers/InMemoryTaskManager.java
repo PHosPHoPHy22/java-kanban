@@ -12,11 +12,11 @@ import java.util.*;
 
 public class InMemoryTaskManager implements TaskManager {
 
-    final Map<Integer, Task> tasks;
-    final Map<Integer, Subtask> subtasks;
-    final Map<Integer, Epic> epics;
-    final HistoryManager historyManager;
-    int countId;
+    protected final Map<Integer, Task> tasks;
+    protected final Map<Integer, Subtask> subtasks;
+    protected final Map<Integer, Epic> epics;
+    private final HistoryManager historyManager;
+    private int countId;
     TreeSet<Task> tasksByStartTime;
 
     public InMemoryTaskManager() {
@@ -35,13 +35,10 @@ public class InMemoryTaskManager implements TaskManager {
             task.setId(countId);
             task.setTypeOfTask(Type.TASK);
             if (!validateStartTimeForTask(task)) {
-                System.out.println("Невозможно создать задачу - ее время пересекается с другой");
                 return;
             }
             tasks.put(task.getId(), task);
             addToTasksByStartTimeTreeSet(task);
-        } else {
-            System.out.println("Такая задача уже создана");
         }
     }
 
@@ -52,7 +49,6 @@ public class InMemoryTaskManager implements TaskManager {
             subtask.setId(countId);
             subtask.setTypeOfTask(Type.SUBTASK);
             if (!validateStartTimeForTask(subtask)) {
-                System.out.println("Невозможно создать подзадачу - ее время пересекается с другой");
                 return;
             }
             Epic epic = epics.get(subtask.getEpicIdForThisSubtask());
@@ -64,8 +60,6 @@ public class InMemoryTaskManager implements TaskManager {
             changeEpicEndTime(epic);
             subtasks.put(subtask.getId(), subtask);
             addToTasksByStartTimeTreeSet(subtask);
-        } else {
-            System.out.println("Такая подзадача уже создана");
         }
     }
 
@@ -77,8 +71,6 @@ public class InMemoryTaskManager implements TaskManager {
             epic.setTypeOfTask(Type.EPIC);
             changeEpicEndTime(epic);
             epics.put(epic.getId(), epic);
-        } else {
-            System.out.println("Такой эпик уже создан");
         }
     }
 
@@ -158,7 +150,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void updateTask(Task task) {
         if (tasks.containsKey(task.getId())) {
             if (!validateStartTimeForTask(task)) {
-                System.out.println("Невозможно обновить задачу - новое время пересекается с существующей задачей");
                 return;
             }
             tasks.put(task.getId(), task);
@@ -169,7 +160,6 @@ public class InMemoryTaskManager implements TaskManager {
     public void updateSubtask(Subtask subtask) {
         if (subtasks.containsKey(subtask.getId())) {
             if (!validateStartTimeForTask(subtask)) {
-                System.out.println("Невозможно обновить подзадачу - новое время пересекается с существующей подзадачей");
                 return;
             }
             epics.get(subtask.getEpicIdForThisSubtask()).deleteSubtaskForThisEpic(subtask.getId());
