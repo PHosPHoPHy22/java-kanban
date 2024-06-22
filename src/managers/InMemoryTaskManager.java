@@ -2,6 +2,8 @@ package managers;
 
 import models.*;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -256,7 +258,29 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     private void changeEpicEndTime(Epic epic) {
-        epic.setDuration(Duration.between(epic.getStartTime(), epic.getEndTime()));
+        Map<Integer, Subtask> subtasks = epic.getSubtasksForThisEpic();
+        if (!subtasks.isEmpty()) {
+            LocalDateTime startTime = subtasks.get(0).getStartTime();
+
+            LocalDateTime endTime = subtasks.get(0).getEndTime();
+
+            for (Subtask subtask : subtasks.values()) {
+                if (subtask.getStartTime().isBefore(startTime)) {
+                    startTime = subtask.getStartTime();
+                }
+                if (subtask.getEndTime().isAfter(endTime)) {
+                    endTime = subtask.getEndTime();
+                }
+            }
+            epic.setStartTime(startTime);
+            epic.setEpicEndTime(endTime);
+
+            Duration duration = null;
+            for (Subtask subtask : subtasks.values()) {
+                duration = Duration.between(subtask.getStartTime(), subtask.getEndTime());
+            }
+            epic.setDuration(duration);
+        }
     }
 
 
