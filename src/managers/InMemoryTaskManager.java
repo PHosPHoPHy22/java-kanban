@@ -257,29 +257,9 @@ public class InMemoryTaskManager implements TaskManager {
     }
 
     private void changeEpicEndTime(Epic epic) {
-        Map<Integer, Subtask> subTaskIds = epic.getSubtasksForThisEpic();
-        LocalDateTime startTime = null;
-        LocalDateTime endTime = null;
-        Duration duration = Duration.ofMinutes(0);
-
-        for (Integer id : subTaskIds.keySet()) {
-            Subtask subTask = subtasks.get(id);
-
-            if (subTask.getStartTime() == null) {
-                return;
-            }
-            if (startTime == null || startTime.isAfter(subTask.getStartTime())) {
-                startTime = subTask.getStartTime();
-            }
-            if (endTime == null || endTime.isBefore(subTask.getEndTime())) {
-                endTime = subTask.getEndTime();
-            }
-            duration = duration.plus(subTask.getDuration());
-        }
-        epic.setStartTime(startTime);
-        epic.setEpicEndTime(endTime);
-        epic.setDuration(duration);
+        epic.setDuration(Duration.between(epic.getStartTime(), epic.getEndTime()));
     }
+
 
     private boolean checkTimeCrossing(Task task1, Task task2) {
         if (task1.getStartTime() == null || task2.getStartTime() == null)
