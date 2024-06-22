@@ -19,16 +19,12 @@ public class Epic extends Task {
     public void addSubtasksForThisEpic(Subtask subtask) {
         if (!subtasksForThisEpic.containsKey(subtask.getId())) {
             subtasksForThisEpic.put(subtask.getId(), subtask);
-        } else {
-            System.out.println("Данная подзадача уже сохранена в Эпике");
         }
     }
 
     public void deleteSubtaskForThisEpic(int id) {
         if (subtasksForThisEpic.containsKey(id)) {
             subtasksForThisEpic.remove(id);
-        } else {
-            System.out.println("У этого Эпика нет такой подзадачи");
         }
     }
 

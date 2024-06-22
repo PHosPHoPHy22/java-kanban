@@ -18,8 +18,6 @@ public class Subtask extends Task {
     public void setEpicIdForThisSubtask(int id) {
         if (relatedEpicId == 0) {
             relatedEpicId = id;
-        } else {
-            System.out.println("У данной подзадачи уже есть Эпик");
         }
     }
 
