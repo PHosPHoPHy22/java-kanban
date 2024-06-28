@@ -13,6 +13,7 @@ import java.util.List;
 import java.time.Duration;
 
 
+
 public class FileBackedTaskManager  extends InMemoryTaskManager {
 
     private final File filename;
@@ -66,20 +67,26 @@ public class FileBackedTaskManager  extends InMemoryTaskManager {
                 epics.put(id, epic);
                 break;
             default:
-                Subtask subtask = new Subtask(name, description);
+                int epicId = Integer.parseInt(idEpicForSub.trim());
+                Epic epicSaved = epics.get(epicId);
+                if (epicSaved == null) {
+                    epicSaved = new Epic(name, description);
+                    epicSaved.setId(epicId);
+                    epicSaved.setTypeOfTask(Type.EPIC);
+                    epics.put(epicId, epicSaved);
+                }
+                Subtask subtask = new Subtask(name, description, Status.NEW, epicId, LocalDateTime.of(2024, 7, 13, 18, 38, 20), 15);
                 subtask.setStatus(getStatus(status));
-                subtask.setEpicIdForThisSubtask(Integer.parseInt(idEpicForSub.trim()));
+                subtask.setEpicIdForThisSubtask(epicId);
                 subtask.setId(id);
                 subtask.setTypeOfTask(Type.SUBTASK);
                 subtask.setStartTime(startTimeFromFile);
                 subtask.setDuration(durationFromFile);
                 subtasks.put(id, subtask);
-                Epic epicSaved = epics.get(subtask.getEpicIdForThisSubtask());
-                if (epicSaved == null) {
-                    return;
-                }
+
                 epicSaved.addSubtasksForThisEpic(subtask);
                 setEpicForChangeStatusEndTime(epicSaved);
+                break;
         }
     }
 

@@ -22,6 +22,16 @@ public class Task implements Cloneable {
         this.taskStatus = status;
     }
 
+    public Task(int id, String name, String description, Status taskStatus, LocalDateTime startTime, int duration) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.taskStatus = taskStatus;
+        this.startTime = startTime;
+        this.duration = Duration.ofMinutes(duration);
+
+
+    }
 
     public Type getType() {
         return Type.TASK;
@@ -56,6 +66,7 @@ public class Task implements Cloneable {
     public Status getStatus() {
         return taskStatus;
     }
+
 
     public void setStatus(Status status) {
         this.taskStatus = status;
