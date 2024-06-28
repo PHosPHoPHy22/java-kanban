@@ -4,6 +4,7 @@ import managers.InMemoryTaskManager;
 import managers.TaskManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import server.HttpTaskServer;
 
@@ -33,6 +34,7 @@ public class HttpTaskServerTest {
         server.stop();
     }
 
+    @DisplayName("Получить список задач")
     @Test
     public void testGetTasks() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
@@ -45,6 +47,7 @@ public class HttpTaskServerTest {
         // Additional assertions on the response body
     }
 
+    @DisplayName("Получить список эпиков")
     @Test
     public void testGetEpics() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
@@ -57,6 +60,7 @@ public class HttpTaskServerTest {
         // Additional assertions on the response body
     }
 
+    @DisplayName("Получить список подзадач")
     @Test
     public void testGetSubtasks() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
@@ -69,6 +73,7 @@ public class HttpTaskServerTest {
         // Additional assertions on the response body
     }
 
+    @DisplayName("Получить историю")
     @Test
     public void testGetHistory() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
@@ -81,6 +86,7 @@ public class HttpTaskServerTest {
         // Additional assertions on the response body
     }
 
+    @DisplayName("Проверка приоритета")
     @Test
     public void testGetPrioritized() throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
